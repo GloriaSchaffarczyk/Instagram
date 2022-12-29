@@ -1,0 +1,87 @@
+body {
+    margin: 0;
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+.cookie {
+    font-family: 'Cookie', cursive;
+    font-weight: 500;
+}
+
+.nunito {
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-bottom: 1px solid #44444445;
+}
+
+nav h1 {
+    font-size: xx-large;
+}
+
+.nav-center input {
+    background-image: url(img/search-s.png);
+    background-repeat: no-repeat;
+    background-position: 4% 50%;
+    background-color: #F1F3F4;
+    padding-left: 40px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    border-radius: 5px;
+    border: none;
+    width: 236px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+.nav-right i {
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    margin-left: 244px;
+    margin-right: 244px;
+}
+
+.main-stories-posts {
+    display: flex;
+    flex-direction: column;
+    float: left;
+    margin-right: 32px;
+    min-width: 470px;
+    max-width: 470px;
+}
+
+.stories {
+    display: block;
+    box-sizing: border-box;
+    overflow-y: hidden;
+    position: relative;
+    border: 1px solid #44444445;
+    border-radius: 8px;
+    margin-bottom: 0;
+    margin-top: 16px;
+    padding: 16px 0;
+}
+
+.new-stories {
+    width: 74px;
+    height: 80px;
+    
+}
+
+.posts {
+
+}
+
+.recommended {
+    width: 319px;
+    height: 1000px;
+}
