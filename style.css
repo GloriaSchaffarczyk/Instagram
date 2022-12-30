@@ -3,6 +3,21 @@ body {
     font-family: 'Nunito Sans', sans-serif;
 }
 
+h1 {
+    margin-block-start: 0.33em;
+    margin-block-end: 0.33em;
+}
+
+h5 {
+    margin-block-start: 0.33em;
+    margin-block-end: 0.33em;
+}
+
+p {
+    margin-block-start: 0.33em;
+    margin-block-end: 0.33em;
+}
+
 .cookie {
     font-family: 'Cookie', cursive;
     font-weight: 500;
@@ -38,9 +53,22 @@ nav h1 {
     font-size: 16px;
 }
 
+.nav-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .nav-right i {
-    margin-left: 8px;
-    margin-right: 8px;
+    margin-left: 12px;
+    margin-right: 12px;
+}
+
+.nav-right img {
+    width: 28px;
+    height: 28px;
+    margin-left: 12px;
+    margin-right: 12px;
 }
 
 main {
@@ -63,25 +91,157 @@ main {
     display: block;
     box-sizing: border-box;
     overflow-y: hidden;
-    position: relative;
     border: 1px solid #44444445;
     border-radius: 8px;
     margin-bottom: 0;
-    margin-top: 16px;
+    margin-top: 24px;
     padding: 16px 0;
 }
 
 .new-stories {
+    display: flex;
     width: 74px;
     height: 80px;
     
 }
 
-.posts {
+.story-user {
+    display: flex;
+    flex-direction: column;
+    margin-left: 16px;
+    margin-right: 8px;
+    align-items: center;
+}
+
+.post-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px;
+    border: 1px solid #44444445;
+    border-radius: 8px 8px 0 0;
+    margin-bottom: 0;
+    margin-top: 24px;
+    padding: 16px;
+}
+
+.post-top img {
+    height: 50px;
+    width: 50px;
+}
+
+.post-top-left {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: flex-start;
 
 }
 
+.post-pic {
+    display: flex;
+}
+
+.post-pic img {
+    width: 469px;
+    height: 100%;
+    border: 0.5px solid #44444445;
+}
+
+.post-bottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid #44444445;
+    margin-top: 0px;
+    padding: 16px;
+    gap: 12px;
+}
+
+.post-bottom-symbols {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.post-bottom-symbols-left i {
+    margin-right: 8px;
+    margin-bottom: 16px;
+}
+
+.comment {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-left: 1px solid #44444445;
+    border-right: 1px solid #44444445;
+    border-bottom: 1px solid #44444445;
+    border-radius: 0 0 8px 8px ;
+    margin-bottom: 24px;
+    padding: 12px;
+}
+
+.comment textarea {
+    width: 360px;
+    border: none;
+    resize: none;
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+textarea:focus {
+    outline: none;
+}
+
+.comment-button {
+    border: none;
+    background-color: #FFFFFF;
+    color: #B3DBFF;
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 800;
+}
+
+.comment-button:hover {
+    color: #0095F6;
+}
+
 .recommended {
-    width: 319px;
-    height: 1000px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 24px;
+    min-width: 320px;
+    float: right;
+}
+
+.user-top {
+    display: flex;
+    justify-content: space-between;
+}
+
+.user-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.user-middle {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.user-left img {
+    width: 56px;
+    height: 56px;
+}
+
+.user-right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.rec-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
