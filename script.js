@@ -36,10 +36,11 @@ let posts = [
         'user-location' : 'Island',
         'posted-pic': 'img/post01.jpg',
         'amount-likes' : '76',
-        'description': '<b>Max_Mustermann</b> Das Wasser war übrigens warm, wegen der vulkanischen Aktivitäten.',
+        'description': 'Eine heiße Quelle mitten in den Bergen.',
         'hashtags': '#iceland #iwanttomovehere #naturalheat',
         'amount-comments': '2',
-        'comments': ['<b>Ronja_Ha</b> Wow, das sieht so schön aus.', '<b>Merel</b> Wo ist das genau?']
+        'followers': ['<b>Ronja_Ha</b>', '<b>Merel</b>'],
+        'comments': ['Wow, das sieht so schön aus.', 'Wo ist das genau?'],
     },
     {
         'user-pic': 'img/user03_active.png',
@@ -47,10 +48,11 @@ let posts = [
         'user-location' : 'Venedig',
         'posted-pic': 'img/post02.jpg',
         'amount-likes' : '397',
-        'description': '<b>Kevin_P</b> Seid ihr schonmal in einer Gondola durch Venedig geschippert?',
+        'description': 'Seid ihr schonmal in einer Gondola durch Venedig geschippert?',
         'hashtags': '#venice #travellife #europe',
         'amount-comments': '3',
-        'comments': ['<b>Hasan</b> Was kostet denn so eine Fahrt?', '<b>Olaf</b> Komm mal lieber wieder nach Hause.', '<b>Annika</b> Wow! Super schön!']
+        'followers': ['<b>Hasan</b> ', '<b>Olaf</b>', '<b>Annika</b>'],
+        'comments': ['Was kostet denn so eine Fahrt?', 'Komm mal lieber wieder nach Hause.', 'Wow! Super schön!']
     },
     {
         'user-pic': 'img/user04_active.png',
@@ -58,10 +60,11 @@ let posts = [
         'user-location' : 'Irgendwo im Nirgendwo',
         'posted-pic': 'img/post03.jpg',
         'amount-likes' : '7',
-        'description': '<b>Isabelle</b> Wer errät wohin ich als nächstes reise?',
+        'description': 'Wer errät wohin ich als nächstes reise?',
         'hashtags': '#lufthansa #a320neo #aviation',
         'amount-comments': '1',
-        'comments': ['<b>Lunia</b> In die Schweiz?']
+        'followers': ['<b>Lunia</b>'],
+        'comments': ['Vielleicht in die Schweiz?']
     },
     {
         'user-pic': 'img/user05_active.png',
@@ -69,10 +72,11 @@ let posts = [
         'user-location' : 'Indonesien',
         'posted-pic': 'img/post04.jpg',
         'amount-likes' : '11.225',
-        'description': '<b>Lisa_und_Stefan</b> Hier sieht es einfach aus wie auf den Malediven.',
+        'description': 'Hier sieht es einfach aus wie auf den Malediven.',
         'hashtags': '#indonesia #travel #bluediamonds',
         'amount-comments': '2',
-        'comments': ['<b>Marek</b> Ach ihr seid in Indonesien? Viel Spaß!', '<b>Daniel</b> Würde gerne tauschen.']
+        'followers': ['<b>Marek</b>', '<b>Daniel</b>'],
+        'comments': ['Ach ihr seid in Indonesien? Viel Spaß!', 'Würde gerne tauschen mit euch.']
     },
     {
         'user-pic': 'img/user06_active.png',
@@ -80,10 +84,11 @@ let posts = [
         'user-location' : 'Chiemsee',
         'posted-pic': 'img/post05.jpg',
         'amount-likes' : '15',
-        'description': '<b>Ramon578</b> Der Chiemsee hat auch seine schönen Seiten.',
+        'description': 'Der Chiemsee hat auch seine schönen Seiten.',
         'hashtags': '#chiemsee',
         'amount-comments': '2',
-        'comments': ['<b>Tamara</b> Was machst du denn am Chiemsee?', '<b>Lukas</b> Wow!']
+        'followers': ['<b>Tamara</b>', '<b>Lukas</b>'],
+        'comments': ['Was machst du denn am Chiemsee?', 'Wow!']
     },
     {
         'user-pic': 'img/user07_active.png',
@@ -91,10 +96,11 @@ let posts = [
         'user-location' : 'Cinque Terre',
         'posted-pic': 'img/post06.jpg',
         'amount-likes' : '297',
-        'description': '<b>Marie_Luise</b> Manarola ist einfach der schönste Ort der Cinque Terre.',
+        'description': 'Manarola ist einfach der schönste Ort der Cinque Terre.',
         'hashtags': '#italy #cinqueterre #amore',
         'amount-comments': '1',
-        'comments': ['<b>Bibi1015</b> Hey @Marie: Da fahren wir nächstes Mal hin.']
+        'followers': ['<b>Bibi1015</b> '],
+        'comments': ['Hey @Marie: Da fahren wir nächstes Mal hin.']
     },
     {
         'user-pic': 'img/user08_active.png',
@@ -102,10 +108,11 @@ let posts = [
         'user-location': 'München',
         'posted-pic': 'img/post07.jpg',
         'amount-likes' : '111',
-        'description': '<b>Developer_Akademie</b> Du willst Programmieren lernen? Dann bist du bei der Developer Akademie genau richtig.',
+        'description': 'Du willst Programmieren lernen? Dann bist du bei der Developer Akademie genau richtig.',
         'hashtags': '#lerneprogrammieren #developer #dukannstdasauch',
         'amount-comments': '2',
-        'comments': ['<b>Gloria</b> Bietet ihr nur Frontend-Kurse oder auch Backend?.', '<b>Marcel</b> Die machen beides.']
+        'followers': ['<b>Gloria</b>', '<b>Marcel</b>'],
+        'comments': ['Bietet ihr nur Frontend-Kurse oder auch Backend?.', 'Du kannst dort beides machen. Also Fullstack...']
     },
 ]
 
@@ -159,9 +166,13 @@ function showPosts() {
             </div>
             <div class="likes-and-description">
                 <h5>Gefällt ${post['amount-likes']} Mal</h5>
-                <p><b>${post['user-name']}</b> Hier ist es einfach wunderschön.</p>
+                <p><b>${post['user-name']}</b> ${post['description']}</p>
                 <p>${post['hashtags']}</p>
                 <p>${post['amount-comments']} Kommentar(e) anzeigen</p>
+            </div>
+            <div class="posted-comments" id="posted-comments${i}">
+            <p><b>${post['followers']}</b></p> 
+            <p>${post['comments']}</p>
             </div>
         </div>
         <div class="comment">
@@ -171,3 +182,10 @@ function showPosts() {
     `
     }
 }
+
+/* function addComment() {
+    let author = document.getElementById('author');
+    let comment = document.getElementById('comment');
+
+    if
+} */
