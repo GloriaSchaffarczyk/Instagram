@@ -1,5 +1,3 @@
-let authors = ['Gast']
-
 let stories = [
     {
         'story-pic': 'img/user02_active.png',
@@ -131,7 +129,7 @@ function showStories() {
         </div>
     `
     }
-
+    showPosts();
 }
 
 function showPosts() {
@@ -172,8 +170,9 @@ function showPosts() {
                 <p>${post['hashtags']}</p>
                 <p>${post['amount-comments']} Kommentar(e) anzeigen</p>
             </div>
-            <div class="posted-comments" id="posted-comments${j}">
-            <p><b>${post['followers']}</b></p><p>${post['comments']}</p>
+            <div class="posted-comments" id="posted-comments">
+            <p><b>${post['followers']}</b>
+            </p><p>${post['comments']}</p>
             </div>
         </div>
         <div class="comment">
@@ -184,9 +183,9 @@ function showPosts() {
     }
 }
 
-function addComment() {
+/*     function addComment(${j}) {
     let author = document.getElementById('author${j}');
     let newComment = document.getElementById('comment${j}').value;
     let commentHTML = document.getElementById('newComment${j}');
     let div = document.createElement('div');
-}
+} */
