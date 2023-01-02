@@ -1,3 +1,5 @@
+let authors = ['Gast']
+
 let stories = [
     {
         'story-pic': 'img/user02_active.png',
@@ -129,14 +131,14 @@ function showStories() {
         </div>
     `
     }
-    showPosts();
+
 }
 
 function showPosts() {
     document.getElementById('post').innerHTML = '';
 
-    for (let i = 0; i < posts.length; i++) {
-        const post = posts[i];
+    for (let j = 0; j < posts.length; j++) {
+        const post = posts[j];
         
         document.getElementById('post').innerHTML += `
         <div class="post-top">
@@ -170,22 +172,21 @@ function showPosts() {
                 <p>${post['hashtags']}</p>
                 <p>${post['amount-comments']} Kommentar(e) anzeigen</p>
             </div>
-            <div class="posted-comments" id="posted-comments${i}">
-            <p><b>${post['followers']}</b></p> 
-            <p>${post['comments']}</p>
+            <div class="posted-comments" id="posted-comments${j}">
+            <p><b>${post['followers']}</b></p><p>${post['comments']}</p>
             </div>
         </div>
         <div class="comment">
             <textarea name="commentsection" id="commentsection" cols="30" rows="1" placeholder="Kommentieren..."></textarea>
-            <button class="comment-button">Posten</button>
+            <button class="comment-button" onclick="addComment(${j})">Posten</button>
         </div>
     `
     }
 }
 
-/* function addComment() {
-    let author = document.getElementById('author');
-    let comment = document.getElementById('comment');
-
-    if
-} */
+function addComment() {
+    let author = document.getElementById('author${j}');
+    let newComment = document.getElementById('comment${j}').value;
+    let commentHTML = document.getElementById('newComment${j}');
+    let div = document.createElement('div');
+}
