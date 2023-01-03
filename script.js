@@ -183,9 +183,9 @@ function showPosts() {
     }
 }
 
-/*     function addComment(${j}) {
+function addComment() {
     let author = document.getElementById('author${j}');
     let newComment = document.getElementById('comment${j}').value;
     let commentHTML = document.getElementById('newComment${j}');
     let div = document.createElement('div');
-} */
+}
