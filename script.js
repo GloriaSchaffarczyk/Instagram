@@ -41,6 +41,8 @@ let posts = [
         'amount-comments': '2',
         'followers': ['<b>Ronja_Ha</b>', '<b>Merel</b>'],
         'comments': ['Wow, das sieht so schön aus.', 'Wo ist das genau?'],
+        'new-comment': [],
+        'guest': '<i class="fa-regular fa-face-smile"></i>'
     },
     {
         'user-pic': 'img/user03_active.png',
@@ -52,7 +54,8 @@ let posts = [
         'hashtags': '#venice #travellife #europe',
         'amount-comments': '3',
         'followers': ['<b>Hasan</b> ', '<b>Olaf</b>', '<b>Annika</b>'],
-        'comments': ['Was kostet denn so eine Fahrt?', 'Komm mal lieber wieder nach Hause.', 'Wow! Super schön!']
+        'comments': ['Was kostet denn so eine Fahrt?', 'Komm mal lieber wieder nach Hause.', 'Wow! Super schön!'],
+        'new-comment': []
     },
     {
         'user-pic': 'img/user04_active.png',
@@ -64,7 +67,8 @@ let posts = [
         'hashtags': '#lufthansa #a320neo #aviation',
         'amount-comments': '1',
         'followers': ['<b>Lunia</b>'],
-        'comments': ['Vielleicht in die Schweiz?']
+        'comments': ['Vielleicht in die Schweiz?'],
+        'new-comment': []
     },
     {
         'user-pic': 'img/user05_active.png',
@@ -76,7 +80,8 @@ let posts = [
         'hashtags': '#indonesia #travel #bluediamonds',
         'amount-comments': '2',
         'followers': ['<b>Marek</b>', '<b>Daniel</b>'],
-        'comments': ['Ach ihr seid in Indonesien? Viel Spaß!', 'Würde gerne tauschen mit euch.']
+        'comments': ['Ach ihr seid in Indonesien? Viel Spaß!', 'Würde gerne tauschen mit euch.'],
+        'new-comment': []
     },
     {
         'user-pic': 'img/user06_active.png',
@@ -88,7 +93,8 @@ let posts = [
         'hashtags': '#chiemsee',
         'amount-comments': '2',
         'followers': ['<b>Tamara</b>', '<b>Lukas</b>'],
-        'comments': ['Was machst du denn am Chiemsee?', 'Wow!']
+        'comments': ['Was machst du denn am Chiemsee?', 'Wow!'],
+        'new-comment': []
     },
     {
         'user-pic': 'img/user07_active.png',
@@ -100,7 +106,8 @@ let posts = [
         'hashtags': '#italy #cinqueterre #amore',
         'amount-comments': '1',
         'followers': ['<b>Bibi1015</b> '],
-        'comments': ['Hey @Marie: Da fahren wir nächstes Mal hin.']
+        'comments': ['Hey @Marie: Da fahren wir nächstes Mal hin.'],
+        'new-comment': []
     },
     {
         'user-pic': 'img/user08_active.png',
@@ -112,7 +119,8 @@ let posts = [
         'hashtags': '#lerneprogrammieren #developer #dukannstdasauch',
         'amount-comments': '2',
         'followers': ['<b>Gloria</b>', '<b>Marcel</b>'],
-        'comments': ['Bietet ihr nur Frontend-Kurse oder auch Backend?.', 'Du kannst dort beides machen. Also Fullstack...']
+        'comments': ['Bietet ihr nur Frontend-Kurse oder auch Backend?.', 'Du kannst dort beides machen. Also Fullstack...'],
+        'new-comment': []
     },
 ]
 
@@ -174,18 +182,18 @@ function showPosts() {
             <p><b>${post['followers']}</b>
             </p><p>${post['comments']}</p>
             </div>
+            <div class="posted-comments" id="new-comment-section"></div>
         </div>
         <div class="comment">
-            <textarea name="commentsection" id="commentsection" cols="30" rows="1" placeholder="Kommentieren..."></textarea>
+            <textarea name="commentsection" id="commentsection${j}" cols="30" rows="1" placeholder="Kommentieren..."></textarea>
             <button class="comment-button" onclick="addComment(${j})">Posten</button>
         </div>
     `
     }
 }
 
-function addComment() {
-    let author = document.getElementById('author${j}');
-    let newComment = document.getElementById('comment${j}').value;
-    let commentHTML = document.getElementById('newComment${j}');
-    let div = document.createElement('div');
+function addComment(j) {
+    let guest = document.getElementById(`guest${j}`);
+    let newComment = document.getElementById(`new-comment-section${j}`).value;
+    let commentHTML = document.getElementById(`new-comment${j}`);
 }
