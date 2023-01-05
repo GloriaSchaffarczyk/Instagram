@@ -185,7 +185,7 @@ function showPosts() {
             <div class="posted-comments" id="new-comment-section"></div>
         </div>
         <div class="comment">
-            <textarea name="commentsection" id="commentsection${j}" cols="30" rows="1" placeholder="Kommentieren..."></textarea>
+            <textarea class="commentsection" id="commentsection${j}" cols="30" rows="1" placeholder="Kommentieren..."></textarea>
             <button class="comment-button" onclick="addComment(${j})">Posten</button>
         </div>
     `
@@ -193,7 +193,22 @@ function showPosts() {
 }
 
 function addComment(j) {
-    let guest = document.getElementById(`guest${j}`);
-    let newComment = document.getElementById(`new-comment-section${j}`).value;
-    let commentHTML = document.getElementById(`new-comment${j}`);
+    let content = document.getElementById(`new-comment-section${j}`)
+    content.innerHTML = '';
+
+    let input = document.getElementById(`commentsection${j}`);
+    posts[j]['new-comment'].push(input.value);
+
+    let post = posts[j];
+
+    for (let k = 0; k < posts['new-comment'].length; k++) {
+        let comment = post['new-comment'][k];
+        content.innerHTML += `<div>${comment}</div>`;
+    }
+    showPosts();
 }
+
+
+/*  let guest = document.getElementById(`guest${j}`);
+    let newComment = document.getElementById(`new-comment-section${j}`).value;
+    let commentHTML = document.getElementById(`new-comment${j}`); */
