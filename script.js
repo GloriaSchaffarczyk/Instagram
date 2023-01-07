@@ -179,10 +179,8 @@ function showPosts() {
                 <p>${post['amount-comments']} Kommentar(e) anzeigen</p>
             </div>
             <div class="posted-comments" id="posted-comments">
-            <p><b>${post['followers']}</b>
-            </p><p>${post['comments']}</p>
             </div>
-            <div class="posted-comments" id="new-comment-section"></div>
+            <div class="posted-comments" id="new-comment-section${j}"></div>
         </div>
         <div class="comment">
             <textarea class="commentsection" id="commentsection${j}" cols="30" rows="1" placeholder="Kommentieren..."></textarea>
@@ -190,9 +188,50 @@ function showPosts() {
         </div>
     `
     }
+    showComments();
 }
 
 function addComment(j) {
+    let content = document.getElementById(`new-comment-section${j}`);
+
+    let input = document.getElementById(`commentsection${j}`);
+    let newComment = input.value;
+    let userName = 'Gast'
+    posts[j]['new-comment'].push(newComment);
+    posts[j]['new-comment'].push(userName);
+
+    content.innerHTML += `<div><b>${userName}</b> ${newComment}</div>`;
+}
+
+function showComments() {
+    document.getElementById('posted-comments').innerHTML = '';
+    let content = document.getElementById(`posted-comments`);
+
+    for (let k = 0; k < posts['followers'].length; k++) {
+        let follower = posts['followers'][k];
+        let comment = posts['comments'][k];
+        content.innerHTML += `<b>${follower}</b> <p>${comment}</p>`;
+    }
+}
+
+/* document.getElementById('new-stories').innerHTML = '';
+
+for (let i = 0; i < stories.length; i++) {
+    const story = stories[i];
+    
+    document.getElementById('new-stories').innerHTML += `
+    <div class="story-user">
+    <img src="${story['story-pic']}" alt="">
+    <span>${story['story-name']}</span>
+    </div>
+`
+}
+showPosts();
+showComments();
+} */
+
+
+/* function addComment(j) {
     let content = document.getElementById(`new-comment-section${j}`)
     content.innerHTML = '';
 
@@ -201,14 +240,46 @@ function addComment(j) {
 
     let post = posts[j];
 
-    for (let k = 0; k < posts['new-comment'].length; k++) {
-        let comment = post['new-comment'][k];
-        content.innerHTML += `<div>${comment}</div>`;
+    if (post['new-comment'].length > 0) {
+        for (let k = 0; k < post['new-comment'].length; k++) {
+            let comment = post['new-comment'][k];
+            content.innerHTML += `<div>${comment}</div>`;
+        }
     }
     showPosts();
-}
-
+} */
 
 /*  let guest = document.getElementById(`guest${j}`);
     let newComment = document.getElementById(`new-comment-section${j}`).value;
     let commentHTML = document.getElementById(`new-comment${j}`); */
+
+
+    /* function createList(items) {
+  let list = '';
+  for (let i = 0; i < items.length; i++) {
+    list += `<div>${items[i]}</div>`;
+  }
+  return list;
+}
+
+<div class="posted-comments" id="posted-comments">
+  <p>Followers:</p>
+  ${createList(post['followers'])}
+  <p>Comments:</p>
+  ${createList(post['comments'])}
+</div>
+*/
+
+/*
+for (let i = 0; i < posts.length; i++) {
+  let post = posts[i];
+  let content = document.getElementById(`new-comment-section${i}`);
+  content.innerHTML = "";
+
+  for (let j = 0; j < post['followers'].length; j++) {
+    let follower = post['followers'][j];
+    let comment = post['comments'][j];
+    content.innerHTML += `<div><b>${follower}</b>: ${comment}</div>`;
+  }
+}
+*/
