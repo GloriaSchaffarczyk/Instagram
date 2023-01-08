@@ -61,6 +61,7 @@ nav h1 {
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
 .nav-right i {
@@ -244,6 +245,7 @@ textarea:focus {
     align-items: center;
     color: #0095F6;
     font-size: 14px;
+    cursor: pointer;
 }
 
 .rec-head {
@@ -281,4 +283,22 @@ textarea:focus {
     flex-direction: column;
     gap: 9px;
     color: #0095F6;
+    cursor: pointer;
+}
+
+.hashtags {
+    color: #1143a6;
+    cursor: pointer;
+}
+
+.liked {
+    color: red;
+}
+
+.d-none {
+    display: none !important;
+}
+
+.d-flex {
+    display: flex !important;
 }

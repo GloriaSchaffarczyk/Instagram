@@ -37,7 +37,7 @@ let posts = [
         'posted-pic': 'img/post01.jpg',
         'amount-likes' : '76',
         'description': 'Eine heiße Quelle mitten in den Bergen.',
-        'hashtags': '#iceland #iwanttomovehere #naturalheat',
+        'hashtags': '#iceland #wannamovehere #naturalheat',
         'amount-comments': '2',
         'followers': ['<b>Ronja_Ha</b>', '<b>Merel</b>'],
         'comments': ['Wow, das sieht so schön aus.', 'Wo ist das genau?'],
@@ -164,31 +164,33 @@ function showPosts() {
         <div class="post-bottom">
             <div class="post-bottom-symbols">
                 <div class="post-bottom-symbols-left">
-                    <i class="fa-regular fa-heart fa-xl"></i>
+                   <p id="heart${j}"><i class="fa-regular fa-heart fa-xl"></i></p>
                     <i class="fa-regular fa-comment fa-xl"></i>
                     <i class="fa-regular fa-envelope fa-xl"></i>
                 </div>
                 <div class="post-bottom-symbol-right">
-                    <i class="fa-regular fa-bookmark fa-xl"></i>
+                    <p><i class="fa-regular fa-bookmark fa-xl"></i></p>
                 </div>
             </div>
             <div class="likes-and-description">
-                <h5>Gefällt ${post['amount-likes']} Mal</h5>
+            <div class="amount-likes" id="amount-likes">
+                <span>GefÃ¤llt ${post['amount-likes']} Mal</span>
+            </div>
                 <p><b>${post['user-name']}</b> ${post['description']}</p>
-                <p>${post['hashtags']}</p>
+                <p class="hashtags">${post['hashtags']}</p>
                 <p>${post['amount-comments']} Kommentar(e) anzeigen</p>
             </div>
-            <div class="posted-comments" id="posted-comments">
+            <div class="posted-comments" id="posted-comments${j}">
             </div>
-            <div class="posted-comments" id="new-comment-section${j}"></div>
+            <div class="new-comments" id="new-comment-section${j}"></div>
         </div>
         <div class="comment">
             <textarea class="commentsection" id="commentsection${j}" cols="30" rows="1" placeholder="Kommentieren..."></textarea>
             <button class="comment-button" onclick="addComment(${j})">Posten</button>
         </div>
     `
+    showComments(j);
     }
-    showComments();
 }
 
 function addComment(j) {
@@ -200,19 +202,51 @@ function addComment(j) {
     posts[j]['new-comment'].push(newComment);
     posts[j]['new-comment'].push(userName);
 
-    content.innerHTML += `<div><b>${userName}</b> ${newComment}</div>`;
+    content.innerHTML += `<div><b>${userName}:</b> ${newComment}</div>`;
 }
 
-function showComments() {
-    document.getElementById('posted-comments').innerHTML = '';
-    let content = document.getElementById(`posted-comments`);
+function showComments(j) {
+    document.getElementById(`posted-comments${j}`).innerHTML = '';
+    let content = document.getElementById(`posted-comments${j}`);
+    content.innerHTML = '';
 
-    for (let k = 0; k < posts['followers'].length; k++) {
-        let follower = posts['followers'][k];
-        let comment = posts['comments'][k];
-        content.innerHTML += `<b>${follower}</b> <p>${comment}</p>`;
+    for (let k = 0; k < posts[j]['followers'].length; k++) {
+        let follower = posts[j]['followers'][k];
+        let comment = posts[j]['comments'][k];
+        content.innerHTML += `<p><b>${follower}:</b> ${comment}</p>`;
     }
 }
+
+function fillHeart(j) {
+    document.getElementById(`heart${j}`).classList.add('d-none');
+    document.getElementById(`blank-heart${j}`).classList.add('d-flex');
+
+    increaseAmount(j);
+}
+
+function increaseAmount(j) {
+    posts[j]['amount-likes']++;
+    let amountArea = document.getElementById(`amount-likes-comm${j}`);
+    amountArea.innerHTML = '';
+    amountArea.innerHTML = `<span>Gefällt ${posts[j]['amount-likes']} Mal</span>`;
+}
+
+function decreasAmount(j) {
+    posts[j]['amount-likes']--;
+    let amountArea = document.getElementById(`amount-likes${j}`);
+    amountArea.innerHTML = '';
+    amountArea.innerHTML = `<span>Gefällt ${posts[j]['amount-likes']} Mal</span>`;
+}
+
+// function decreaseAmount(i) {
+//     if (amount-likes[i] > 1) {
+//         amount-likes[i]--;
+//     } else {
+//         basketDishes.splice(i, 1);
+//         basketPrices.splice(i, 1);
+//         basketAmounts.splice(i, 1);
+//     }
+// }
 
 /* document.getElementById('new-stories').innerHTML = '';
 
