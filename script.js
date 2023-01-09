@@ -33,9 +33,9 @@ let posts = [
     {
         'user-pic': 'img/user02_active.png',
         'user-name': 'Max_Mustermann',
-        'user-location' : 'Island',
+        'user-location': 'Island',
         'posted-pic': 'img/post01.jpg',
-        'amount-likes' : '76',
+        'amount-likes': '76',
         'description': 'Eine heiße Quelle mitten in den Bergen.',
         'hashtags': '#iceland #wannamovehere #naturalheat',
         'amount-comments': '2',
@@ -47,9 +47,9 @@ let posts = [
     {
         'user-pic': 'img/user03_active.png',
         'user-name': 'Kevin_P',
-        'user-location' : 'Venedig',
+        'user-location': 'Venedig',
         'posted-pic': 'img/post02.jpg',
-        'amount-likes' : '397',
+        'amount-likes': '397',
         'description': 'Seid ihr schonmal in einer Gondola durch Venedig geschippert?',
         'hashtags': '#venice #travellife #europe',
         'amount-comments': '3',
@@ -60,9 +60,9 @@ let posts = [
     {
         'user-pic': 'img/user04_active.png',
         'user-name': 'Isabelle',
-        'user-location' : 'Irgendwo im Nirgendwo',
+        'user-location': 'Irgendwo im Nirgendwo',
         'posted-pic': 'img/post03.jpg',
-        'amount-likes' : '7',
+        'amount-likes': '7',
         'description': 'Wer errät wohin ich als nächstes reise?',
         'hashtags': '#lufthansa #a320neo #aviation',
         'amount-comments': '1',
@@ -73,9 +73,9 @@ let posts = [
     {
         'user-pic': 'img/user05_active.png',
         'user-name': 'Lisa_und_Stefan',
-        'user-location' : 'Indonesien',
+        'user-location': 'Indonesien',
         'posted-pic': 'img/post04.jpg',
-        'amount-likes' : '11.225',
+        'amount-likes': '11.225',
         'description': 'Hier sieht es einfach aus wie auf den Malediven.',
         'hashtags': '#indonesia #travel #bluediamonds',
         'amount-comments': '2',
@@ -86,9 +86,9 @@ let posts = [
     {
         'user-pic': 'img/user06_active.png',
         'user-name': 'Ramon578',
-        'user-location' : 'Chiemsee',
+        'user-location': 'Chiemsee',
         'posted-pic': 'img/post05.jpg',
-        'amount-likes' : '15',
+        'amount-likes': '15',
         'description': 'Der Chiemsee hat auch seine schönen Seiten.',
         'hashtags': '#chiemsee',
         'amount-comments': '2',
@@ -99,9 +99,9 @@ let posts = [
     {
         'user-pic': 'img/user07_active.png',
         'user-name': 'Marie_Luise',
-        'user-location' : 'Cinque Terre',
+        'user-location': 'Cinque Terre',
         'posted-pic': 'img/post06.jpg',
-        'amount-likes' : '297',
+        'amount-likes': '297',
         'description': 'Manarola ist einfach der schönste Ort der Cinque Terre.',
         'hashtags': '#italy #cinqueterre #amore',
         'amount-comments': '1',
@@ -114,7 +114,7 @@ let posts = [
         'user-name': 'Developer_Akademie',
         'user-location': 'München',
         'posted-pic': 'img/post07.jpg',
-        'amount-likes' : '111',
+        'amount-likes': '111',
         'description': 'Du willst Programmieren lernen? Dann bist du bei der Developer Akademie genau richtig.',
         'hashtags': '#lerneprogrammieren #developer #dukannstdasauch',
         'amount-comments': '2',
@@ -129,7 +129,7 @@ function showStories() {
 
     for (let i = 0; i < stories.length; i++) {
         const story = stories[i];
-        
+
         document.getElementById('new-stories').innerHTML += `
         <div class="story-user">
         <img src="${story['story-pic']}" alt="">
@@ -145,51 +145,57 @@ function showPosts() {
 
     for (let j = 0; j < posts.length; j++) {
         const post = posts[j];
-        
-        document.getElementById('post').innerHTML += `
-        <div class="post-top">
-            <div class="post-top-left">
-                <img src="${post['user-pic']}" alt="">
-                <div class="post-location">
-                    <h5>${post['user-name']}</h5>
-                    <p>${post['user-location']}</p>
+
+        document.getElementById('post').innerHTML +=
+        `
+        <div class="post-div" id="post-div">
+            <div class="post-top">
+                <div class="post-top-left">
+                        <img src="${post['user-pic']}" alt="">
+                        <div class="post-location">
+                            <h5>${post['user-name']}</h5>
+                            <p>${post['user-location']}</p>
+                        </div>
                 </div>
-            </div>
-            <i class="fa-solid fa-ellipsis fa-xl"></i>
+                        <div class="post-top-right">
+                            <i class="fa-solid fa-ellipsis fa-xl"></i>
+                        </div>
             </div>
             <div class="post-pic">
-            <img src="${post['posted-pic']}" alt="">
+                    <img src="${post['posted-pic']}" alt="">
             </div>
-        </div>
-        <div class="post-bottom">
-            <div class="post-bottom-symbols">
-                <div class="post-bottom-symbols-left">
-                   <p id="heart${j}"><i class="fa-regular fa-heart fa-xl"></i></p>
-                    <i class="fa-regular fa-comment fa-xl"></i>
-                    <i class="fa-regular fa-envelope fa-xl"></i>
+            <div class="post-bottom">
+                <div class="post-bottom-symbols">
+                        <div class="post-bottom-symbols-left">
+                            <i class="fa-regular fa-heart fa-xl black" id="heart${j}" onclick="toggle(${j})"></i>
+                            <i class="fa-regular fa-comment fa-xl"></i>
+                            <i class="fa-regular fa-envelope fa-xl"></i>
+                        </div>
+                        <div class="post-bottom-symbol-right">
+                            <p><i class="fa-regular fa-bookmark fa-xl"></i></p>
+                        </div>
                 </div>
-                <div class="post-bottom-symbol-right">
-                    <p><i class="fa-regular fa-bookmark fa-xl"></i></p>
+                <div class="likes-and-description">
+                            <div class="amount-likes" id="amount-likes">
+                                <span>GefÃ¤llt ${post['amount-likes']} Mal</span>
+                            </div>
+                            <div>    
+                                <p><b>${post['user-name']}</b> ${post['description']}</p>
+                                <p class="hashtags">${post['hashtags']}</p>
+                                <p>${post['amount-comments']} Kommentar(e) anzeigen</p>
+                            </div>
+                        </div>
+                        <div class="posted-comments" id="posted-comments${j}"></div>
+                        <div class="new-comments" id="new-comment-section${j}"></div>
+                </div>
+                <div class="comment">
+                    <textarea class="commentsection" id="commentsection${j}" cols="30" rows="1" placeholder="Kommentieren..."></textarea>
+                    <button class="comment-button" onclick="addComment(${j})">Posten</button>
                 </div>
             </div>
-            <div class="likes-and-description">
-            <div class="amount-likes" id="amount-likes">
-                <span>GefÃ¤llt ${post['amount-likes']} Mal</span>
-            </div>
-                <p><b>${post['user-name']}</b> ${post['description']}</p>
-                <p class="hashtags">${post['hashtags']}</p>
-                <p>${post['amount-comments']} Kommentar(e) anzeigen</p>
-            </div>
-            <div class="posted-comments" id="posted-comments${j}">
-            </div>
-            <div class="new-comments" id="new-comment-section${j}"></div>
         </div>
-        <div class="comment">
-            <textarea class="commentsection" id="commentsection${j}" cols="30" rows="1" placeholder="Kommentieren..."></textarea>
-            <button class="comment-button" onclick="addComment(${j})">Posten</button>
-        </div>
-    `
-    showComments(j);
+        `
+        showComments(j);
     }
 }
 
@@ -217,9 +223,9 @@ function showComments(j) {
     }
 }
 
-function fillHeart(j) {
-    document.getElementById(`heart${j}`).classList.add('d-none');
-    document.getElementById(`blank-heart${j}`).classList.add('d-flex');
+function toggle(j) {
+    var element = document.getElementById(`heart${j}`);
+    element.classList.toggle("red");
 
     increaseAmount(j);
 }
@@ -231,7 +237,7 @@ function increaseAmount(j) {
     amountArea.innerHTML = `<span>Gefällt ${posts[j]['amount-likes']} Mal</span>`;
 }
 
-function decreasAmount(j) {
+function decreaseAmount(j) {
     posts[j]['amount-likes']--;
     let amountArea = document.getElementById(`amount-likes${j}`);
     amountArea.innerHTML = '';
@@ -288,19 +294,19 @@ showComments();
     let commentHTML = document.getElementById(`new-comment${j}`); */
 
 
-    /* function createList(items) {
-  let list = '';
-  for (let i = 0; i < items.length; i++) {
-    list += `<div>${items[i]}</div>`;
-  }
-  return list;
+/* function createList(items) {
+let list = '';
+for (let i = 0; i < items.length; i++) {
+list += `<div>${items[i]}</div>`;
+}
+return list;
 }
 
 <div class="posted-comments" id="posted-comments">
-  <p>Followers:</p>
-  ${createList(post['followers'])}
-  <p>Comments:</p>
-  ${createList(post['comments'])}
+<p>Followers:</p>
+${createList(post['followers'])}
+<p>Comments:</p>
+${createList(post['comments'])}
 </div>
 */
 

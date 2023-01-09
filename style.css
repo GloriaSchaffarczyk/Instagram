@@ -291,14 +291,11 @@ textarea:focus {
     cursor: pointer;
 }
 
-.liked {
+.red {
     color: red;
 }
 
-.d-none {
-    display: none !important;
+.black {
+    color: black;
 }
 
-.d-flex {
-    display: flex !important;
-}
