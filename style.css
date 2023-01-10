@@ -291,11 +291,19 @@ textarea:focus {
     cursor: pointer;
 }
 
-.red {
-    color: red;
+.heart-black {
+    color: rgb(0, 0, 0);
 }
 
-.black {
+.heart-red {
+    color: tomato;
+}
+
+.bookmark-black {
     color: black;
+}
+
+.bookmark-green {
+    color: rgb(74, 186, 74);
 }
 

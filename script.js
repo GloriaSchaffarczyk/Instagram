@@ -167,12 +167,12 @@ function showPosts() {
             <div class="post-bottom">
                 <div class="post-bottom-symbols">
                         <div class="post-bottom-symbols-left">
-                            <i class="fa-regular fa-heart fa-xl black" id="heart${j}" onclick="toggle(${j})"></i>
+                            <i class="fa-regular fa-heart fa-xl heart-black" id="heart${j}" onclick="toggleHeart(${j})"></i>
                             <i class="fa-regular fa-comment fa-xl"></i>
                             <i class="fa-regular fa-envelope fa-xl"></i>
                         </div>
                         <div class="post-bottom-symbol-right">
-                            <p><i class="fa-regular fa-bookmark fa-xl"></i></p>
+                            <i class="fa-regular fa-bookmark fa-xl bookmark-black" id="bookmark${j}" onclick="toggleBookmark(${j})"></i>
                         </div>
                 </div>
                 <div class="likes-and-description">
@@ -223,11 +223,18 @@ function showComments(j) {
     }
 }
 
-function toggle(j) {
+function toggleHeart(j) {
     var element = document.getElementById(`heart${j}`);
-    element.classList.toggle("red");
+    element.classList.toggle("heart-red");
+    element.classList.toggle("fa-solid");
 
     increaseAmount(j);
+}
+
+function toggleBookmark(j) {
+    var element = document.getElementById(`bookmark${j}`);
+    element.classList.toggle("bookmark-green");
+    element.classList.toggle("fa-solid");
 }
 
 function increaseAmount(j) {
