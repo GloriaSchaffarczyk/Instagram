@@ -147,7 +147,7 @@ function showPosts() {
         const post = posts[j];
 
         document.getElementById('post').innerHTML +=
-        `
+            `
         <div class="post-div" id="post-div">
             <div class="post-top">
                 <div class="post-top-left">
@@ -177,7 +177,7 @@ function showPosts() {
                 </div>
                 <div class="likes-and-description">
                             <div class="amount-likes" id="amount-likes">
-                                <span>GefÃ¤llt ${post['amount-likes']} Mal</span>
+                                <span>Gef&auml;llt ${post['amount-likes']} Mal</span>
                             </div>
                             <div>    
                                 <p><b>${post['user-name']}</b> ${post['description']}</p>
@@ -200,16 +200,23 @@ function showPosts() {
 }
 
 function addComment(j) {
-    let content = document.getElementById(`new-comment-section${j}`);
+     let content = document.getElementById(`new-comment-section${j}`);
+    
+     let input = document.getElementById(`commentsection${j}`);
+     let newComment = input.value;
+     let userName = 'Gast'
 
-    let input = document.getElementById(`commentsection${j}`);
-    let newComment = input.value;
-    let userName = 'Gast'
-    posts[j]['new-comment'].push(newComment);
-    posts[j]['new-comment'].push(userName);
+     // checkt ob die Textarea leer ist
+     if (document.getElementById(`commentsection${j}`).value.length > 0) {
+        posts[j]['new-comment'].push(newComment);
+        posts[j]['new-comment'].push(userName);
 
-    content.innerHTML += `<div><b>${userName}:</b> ${newComment}</div>`;
-}
+        content.innerHTML += `<div><b>${userName}:</b> ${newComment}</div>`;
+     } else {
+        alert('Bitte gib etwas mehr Text ein.')
+     }
+     input.value = ''; // leert die Textarea nach der Texteingabe
+ }
 
 function showComments(j) {
     document.getElementById(`posted-comments${j}`).innerHTML = '';
@@ -224,7 +231,7 @@ function showComments(j) {
 }
 
 function toggleHeart(j) {
-    var element = document.getElementById(`heart${j}`);
+    let element = document.getElementById(`heart${j}`);
     element.classList.toggle("heart-red");
     element.classList.toggle("fa-solid");
 
@@ -232,7 +239,7 @@ function toggleHeart(j) {
 }
 
 function toggleBookmark(j) {
-    var element = document.getElementById(`bookmark${j}`);
+    let element = document.getElementById(`bookmark${j}`);
     element.classList.toggle("bookmark-green");
     element.classList.toggle("fa-solid");
 }
@@ -241,14 +248,14 @@ function increaseAmount(j) {
     posts[j]['amount-likes']++;
     let amountArea = document.getElementById(`amount-likes-comm${j}`);
     amountArea.innerHTML = '';
-    amountArea.innerHTML = `<span>Gefällt ${posts[j]['amount-likes']} Mal</span>`;
+    amountArea.innerHTML = `<span>Gef&auml;llt ${posts[j]['amount-likes']} Mal</span>`;
 }
 
 function decreaseAmount(j) {
     posts[j]['amount-likes']--;
     let amountArea = document.getElementById(`amount-likes${j}`);
     amountArea.innerHTML = '';
-    amountArea.innerHTML = `<span>Gefällt ${posts[j]['amount-likes']} Mal</span>`;
+    amountArea.innerHTML = `<span>Gef&auml;llt ${posts[j]['amount-likes']} Mal</span>`;
 }
 
 // function decreaseAmount(i) {
