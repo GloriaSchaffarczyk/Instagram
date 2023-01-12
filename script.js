@@ -199,6 +199,10 @@ function showPosts() {
     }
 }
 
+// Variablen werden ab hier in den Funktionen in (``) übergeben, da sie in HTML-Text eingefügt werden.
+// Variablen werden mit ${} übergeben, da sie als Elemente in einer For-Schleife mehrfach erstellt werden.
+// Variablen werden in den Funktionen als simple Buchstaben übergeben, weil ???
+
 function addComment(j) {
      let content = document.getElementById(`new-comment-section${j}`);
     
@@ -211,11 +215,15 @@ function addComment(j) {
         posts[j]['new-comment'].push(newComment);
         posts[j]['new-comment'].push(userName);
 
-        content.innerHTML += `<div><b>${userName}:</b> ${newComment}</div>`;
+        content.innerHTML += `<div class="new-comment">
+        <div><b>${userName}:</b> ${newComment}</div>
+        <div class="trash" onclick="deleteComment(${j})"><i class="fa-regular fa-trash-can"></i></div>
+        </div>`;
      } else {
         alert('Bitte gib etwas mehr Text ein.')
      }
      input.value = ''; // leert die Textarea nach der Texteingabe
+     saveAsText(j);
  }
 
 function showComments(j) {
@@ -258,6 +266,30 @@ function decreaseAmount(j) {
     amountArea.innerHTML = `<span>Gef&auml;llt ${posts[j]['amount-likes']} Mal</span>`;
 }
 
+// function saveComment() {
+
+// }
+
+function deleteComment() {
+    const comment = posts[0]['new-comment'];
+    comment.push('comment');
+    posts[0]['new-comment'].splice(comments.length);
+}
+
+function saveAsText(j) {
+    let commentsAsText = JSON.stringify('posts[j][new-comment]');
+    localStorage.setItem('posts[j][new-comment]', JSON.stringify(commentsAsText));
+}
+
+function loadAsText() {
+    let commentsAsText = localStorage.getItem('posts[j][new-comment]');
+
+    if (commentsAsText) {
+        posts[j]['new-comment'] = JSON.parse(commentsAsText);
+    }
+}
+
+
 // function decreaseAmount(i) {
 //     if (amount-likes[i] > 1) {
 //         amount-likes[i]--;
@@ -268,72 +300,3 @@ function decreaseAmount(j) {
 //     }
 // }
 
-/* document.getElementById('new-stories').innerHTML = '';
-
-for (let i = 0; i < stories.length; i++) {
-    const story = stories[i];
-    
-    document.getElementById('new-stories').innerHTML += `
-    <div class="story-user">
-    <img src="${story['story-pic']}" alt="">
-    <span>${story['story-name']}</span>
-    </div>
-`
-}
-showPosts();
-showComments();
-} */
-
-
-/* function addComment(j) {
-    let content = document.getElementById(`new-comment-section${j}`)
-    content.innerHTML = '';
-
-    let input = document.getElementById(`commentsection${j}`);
-    posts[j]['new-comment'].push(input.value);
-
-    let post = posts[j];
-
-    if (post['new-comment'].length > 0) {
-        for (let k = 0; k < post['new-comment'].length; k++) {
-            let comment = post['new-comment'][k];
-            content.innerHTML += `<div>${comment}</div>`;
-        }
-    }
-    showPosts();
-} */
-
-/*  let guest = document.getElementById(`guest${j}`);
-    let newComment = document.getElementById(`new-comment-section${j}`).value;
-    let commentHTML = document.getElementById(`new-comment${j}`); */
-
-
-/* function createList(items) {
-let list = '';
-for (let i = 0; i < items.length; i++) {
-list += `<div>${items[i]}</div>`;
-}
-return list;
-}
-
-<div class="posted-comments" id="posted-comments">
-<p>Followers:</p>
-${createList(post['followers'])}
-<p>Comments:</p>
-${createList(post['comments'])}
-</div>
-*/
-
-/*
-for (let i = 0; i < posts.length; i++) {
-  let post = posts[i];
-  let content = document.getElementById(`new-comment-section${i}`);
-  content.innerHTML = "";
-
-  for (let j = 0; j < post['followers'].length; j++) {
-    let follower = post['followers'][j];
-    let comment = post['comments'][j];
-    content.innerHTML += `<div><b>${follower}</b>: ${comment}</div>`;
-  }
-}
-*/

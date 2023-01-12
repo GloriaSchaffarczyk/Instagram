@@ -210,6 +210,11 @@ textarea:focus {
     color: #0095F6;
 }
 
+.new-comment {
+    display: flex;
+    justify-content: space-between;
+}
+
 .recommended {
     display: flex;
     flex-direction: column;
