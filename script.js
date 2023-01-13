@@ -281,6 +281,12 @@ function saveAsText(j) {
     localStorage.setItem('posts[j][new-comment]', JSON.stringify(commentsAsText));
 }
 
+// function saveAsText(j) {
+//     let commentsAsText = JSON.stringify(posts[j]['new-comment']);
+//     localStorage.setItem(posts[j]['new-comment'], commentsAsText);
+// }
+
+
 function loadAsText() {
     let commentsAsText = localStorage.getItem('posts[j][new-comment]');
 
