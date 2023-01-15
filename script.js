@@ -176,7 +176,7 @@ function showPosts() {
                         </div>
                 </div>
                 <div class="likes-and-description">
-                            <div class="amount-likes" id="amount-likes">
+                            <div class="likes" id="likes${j}">
                                 <span>Gef&auml;llt ${post['amount-likes']} Mal</span>
                             </div>
                             <div>    
@@ -204,27 +204,28 @@ function showPosts() {
 // Variablen werden in den Funktionen als simple Buchstaben übergeben, weil ???
 
 function addComment(j) {
-     let content = document.getElementById(`new-comment-section${j}`);
-    
-     let input = document.getElementById(`commentsection${j}`);
-     let newComment = input.value;
-     let userName = 'Gast'
+    let content = document.getElementById(`new-comment-section${j}`);
 
-     // checkt ob die Textarea leer ist
-     if (document.getElementById(`commentsection${j}`).value.length > 0) {
-        posts[j]['new-comment'].push(newComment);
+    let input = document.getElementById(`commentsection${j}`);
+    let newComment = input.value;
+    let userName = 'Gast'
+
+    // checkt ob die Textarea leer ist
+    if (document.getElementById(`commentsection${j}`).value.length > 0) {
         posts[j]['new-comment'].push(userName);
+        posts[j]['new-comment'].push(newComment);
 
         content.innerHTML += `<div class="new-comment">
         <div><b>${userName}:</b> ${newComment}</div>
         <div class="trash" onclick="deleteComment(${j})"><i class="fa-regular fa-trash-can"></i></div>
         </div>`;
-     } else {
+    } else {
         alert('Bitte gib etwas mehr Text ein.')
-     }
-     input.value = ''; // leert die Textarea nach der Texteingabe
-     saveAsText(j);
- }
+    }
+    input.value = ''; // leert die Textarea nach der Texteingabe
+    saveAsText(j);
+    loadAsText(j);
+}
 
 function showComments(j) {
     document.getElementById(`posted-comments${j}`).innerHTML = '';
@@ -238,76 +239,48 @@ function showComments(j) {
     }
 }
 
-function toggleHeart(j) {
-    let element = document.getElementById(`heart${j}`);
-    element.classList.toggle("heart-red");
-    element.classList.toggle("fa-solid");
-
-    increaseAmount(j);
-}
-
 function toggleBookmark(j) {
     let element = document.getElementById(`bookmark${j}`);
     element.classList.toggle("bookmark-green");
     element.classList.toggle("fa-solid");
 }
 
-function increaseAmount(j) {
-    posts[j]['amount-likes']++;
-    let amountArea = document.getElementById(`amount-likes-comm${j}`);
-    amountArea.innerHTML = '';
-    amountArea.innerHTML = `<span>Gef&auml;llt ${posts[j]['amount-likes']} Mal</span>`;
+function toggleHeart(j) {
+    let element = document.getElementById(`heart${j}`);
+    element.classList.toggle("heart-red");
+    element.classList.toggle("fa-solid");
+
+    changeAmount(j);
 }
 
-function decreaseAmount(j) {
-    posts[j]['amount-likes']--;
-    let amountArea = document.getElementById(`amount-likes${j}`);
-    amountArea.innerHTML = '';
-    amountArea.innerHTML = `<span>Gef&auml;llt ${posts[j]['amount-likes']} Mal</span>`;
-}
+function changeAmount(j) {
+    posts[j]['amount-likes'] =! posts[j]['amount-likes'];
+    let amountArea = document.getElementById(`likes${j}`);
 
-// function saveComment() {
-
-// }
-
-function deleteComment() {
-    const comment = posts[0]['new-comment'];
-    comment.push('comment');
-    posts[0]['new-comment'].splice(comments.length);
+    if (amountArea) {
+        posts[j]['amount-likes']++;
+        amountArea.innerHTML = `<span>Gef&auml;llt ${posts[j]['amount-likes']} Mal</span>`;
+    } else {
+        posts[j]['amount-likes']--;
+    }
 }
 
 function saveAsText(j) {
-    let commentsAsText = JSON.stringify('posts[j][new-comment]');
-    localStorage.setItem('posts[j][new-comment]', JSON.stringify(commentsAsText));
+    let commentsAsText = JSON.stringify(posts[j]['new-comment']);
+    localStorage.setItem(`Kommentar[${j}]`, commentsAsText);
 }
 
-// function saveAsText(j) {
-//     let commentsAsText = JSON.stringify(posts[j]['new-comment']);
-//     localStorage.setItem(posts[j]['new-comment'], commentsAsText);
-// }
-
-// function saveAsText(j) {
-//     let commentsAsText = JSON.stringify(posts[j]['new-comment']);
-//     localStorage.setItem(posts[j]['new-comment'], commentsAsText);
-// }
-
-
-function loadAsText() {
-    let commentsAsText = localStorage.getItem('posts[j][new-comment]');
+function loadAsText(j) {
+    let commentsAsText = localStorage.getItem(`Kommentar[${j}]`);
 
     if (commentsAsText) {
         posts[j]['new-comment'] = JSON.parse(commentsAsText);
     }
 }
 
+function deleteComment(j, k) {
+    posts[j]['new-comment'].splice(k, 2);
 
-// function decreaseAmount(i) {
-//     if (amount-likes[i] > 1) {
-//         amount-likes[i]--;
-//     } else {
-//         basketDishes.splice(i, 1);
-//         basketPrices.splice(i, 1);
-//         basketAmounts.splice(i, 1);
-//     }
-// }
-
+    saveAsText(j);
+    showPosts();
+}
