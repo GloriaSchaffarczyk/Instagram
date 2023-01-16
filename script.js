@@ -250,20 +250,59 @@ function toggleHeart(j) {
     element.classList.toggle("heart-red");
     element.classList.toggle("fa-solid");
 
-    changeAmount(j);
+    toggleAmount(j);
 }
 
-function changeAmount(j) {
-    posts[j]['amount-likes'] =! posts[j]['amount-likes'];
-    let amountArea = document.getElementById(`likes${j}`);
+function toggleAmount(j) {
+    let element = document.getElementById(`heart${j}`);
 
-    if (amountArea) {
+    if (element.classList.contains("heart-red")) {
         posts[j]['amount-likes']++;
-        amountArea.innerHTML = `<span>Gef&auml;llt ${posts[j]['amount-likes']} Mal</span>`;
+        document.getElementById(`likes${j}`).innerHTML = '';
+        document.getElementById(`likes${j}`).innerHTML = `<span>Gef&auml;llt ${posts[j]['amount-likes']} Mal</span>`; 
     } else {
         posts[j]['amount-likes']--;
+        document.getElementById(`likes${j}`).innerHTML = '';
+        document.getElementById(`likes${j}`).innerHTML = `<span>Gef&auml;llt ${posts[j]['amount-likes']} Mal</span>`;
     }
+    showPosts();
 }
+
+// function heart(j){
+//     if (posts[i]['amount-likes']==true){
+//         return`<img onclick="removeLike(${j})" id="postWindowaddLike${j}" src="img/heartRed.png">`
+//     }
+//     else{
+//         return`<img class="postWindowLikeFilter" onclick="addLike(${j})" id="postWindowaddLike${j}" src="img/heartBlackOutline.png">`
+//     }
+// }
+
+// function addLike(j){
+//     posts[i]['amount-likes'] = true; 
+//     posts[i]['amount-likes']++;  
+//     document.getElementById(`likes${j}`).innerHTML = '';
+//     document.getElementById(`likes${j}`).innerHTML = `<span>Gef&auml;llt ${posts[j]['amount-likes']} Mal</span>`; 
+//     showPosts();   
+// }
+
+// function removeLike(i){
+//     posts[i]['amount-likes'] = false;
+//     posts[i]['amount-likes']--;
+//     document.getElementById(`likes${j}`).innerHTML = '';
+//     document.getElementById(`likes${j}`).innerHTML = `<span>Gef&auml;llt ${posts[j]['amount-likes']} Mal</span>`;
+//     showPosts();
+// }
+
+// function changeAmount(j) {
+//     let amountArea = document.getElementById(`likes${j}`);
+
+//     if (amountArea) {
+//         posts[j]['amount-likes']++;
+//         amountArea.innerHTML = `<span>Gef&auml;llt ${posts[j]['amount-likes']} Mal</span>`;
+//     } else {
+//         posts[j]['amount-likes']--;
+//     }
+// }
 
 function saveAsText(j) {
     let commentsAsText = JSON.stringify(posts[j]['new-comment']);
