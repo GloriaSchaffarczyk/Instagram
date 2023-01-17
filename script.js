@@ -78,7 +78,7 @@ let posts = [
         'user-name': 'Lisa_und_Stefan',
         'user-location': 'Indonesien',
         'posted-pic': 'img/post04.jpg',
-        'amount-likes': '11.225',
+        'amount-likes': '11225',
         'description': 'Hier sieht es einfach aus wie auf den Malediven.',
         'hashtags': '#indonesia #travel #bluediamonds',
         'amount-comments': '2',
@@ -254,60 +254,26 @@ function toggleBookmark(j) {
 
 function getLikeState(j) {
     if (posts[j]['isLiked'] === true) {
-    return `fa-solid heart-red`;
-    } else { 
-    return `fa-regular heart-black`;
+        return `fa-solid heart-red`;
+    } else {
+        return `fa-regular heart-black`;
     }
 }
 
 function toggleHeart(j) {
-
     if (posts[j]['isLiked'] === false) {
         posts[j]['amount-likes']++;
         document.getElementById(`likes${j}`).innerHTML = '';
-        document.getElementById(`likes${j}`).innerHTML = `<span>Gef&auml;llt ${posts[j]['amount-likes']} Mal</span>`; 
+        document.getElementById(`likes${j}`).innerHTML = `<span>Gef&auml;llt ${posts[j]['amount-likes']} Mal</span>`;
+        posts[j]['isLiked'] = true;
     } else {
         posts[j]['amount-likes']--;
         document.getElementById(`likes${j}`).innerHTML = '';
         document.getElementById(`likes${j}`).innerHTML = `<span>Gef&auml;llt ${posts[j]['amount-likes']} Mal</span>`;
+        posts[j]['isLiked'] = false;
     }
+    showPosts(); // musste noch hinzugefügt werden, damit das Herz sich fräbt (neu gerenderd)
 }
-
-// function heart(j){
-//     if (posts[i]['amount-likes']==true){
-//         return`<img onclick="removeLike(${j})" id="postWindowaddLike${j}" src="img/heartRed.png">`
-//     }
-//     else{
-//         return`<img class="postWindowLikeFilter" onclick="addLike(${j})" id="postWindowaddLike${j}" src="img/heartBlackOutline.png">`
-//     }
-// }
-
-// function addLike(j){
-//     posts[i]['amount-likes'] = true; 
-//     posts[i]['amount-likes']++;  
-//     document.getElementById(`likes${j}`).innerHTML = '';
-//     document.getElementById(`likes${j}`).innerHTML = `<span>Gef&auml;llt ${posts[j]['amount-likes']} Mal</span>`; 
-//     showPosts();   
-// }
-
-// function removeLike(i){
-//     posts[i]['amount-likes'] = false;
-//     posts[i]['amount-likes']--;
-//     document.getElementById(`likes${j}`).innerHTML = '';
-//     document.getElementById(`likes${j}`).innerHTML = `<span>Gef&auml;llt ${posts[j]['amount-likes']} Mal</span>`;
-//     showPosts();
-// }
-
-// function changeAmount(j) {
-//     let amountArea = document.getElementById(`likes${j}`);
-
-//     if (amountArea) {
-//         posts[j]['amount-likes']++;
-//         amountArea.innerHTML = `<span>Gef&auml;llt ${posts[j]['amount-likes']} Mal</span>`;
-//     } else {
-//         posts[j]['amount-likes']--;
-//     }
-// }
 
 function saveAsText(j) {
     let commentsAsText = JSON.stringify(posts[j]['new-comment']);
