@@ -42,7 +42,8 @@ let posts = [
         'followers': ['<b>Ronja_Ha</b>', '<b>Merel</b>'],
         'comments': ['Wow, das sieht so schön aus.', 'Wo ist das genau?'],
         'new-comment': [],
-        'guest': '<i class="fa-regular fa-face-smile"></i>'
+        'guest': '<i class="fa-regular fa-face-smile"></i>',
+        'isLiked': false
     },
     {
         'user-pic': 'img/user03_active.png',
@@ -55,7 +56,8 @@ let posts = [
         'amount-comments': '3',
         'followers': ['<b>Hasan</b> ', '<b>Olaf</b>', '<b>Annika</b>'],
         'comments': ['Was kostet denn so eine Fahrt?', 'Komm mal lieber wieder nach Hause.', 'Wow! Super schön!'],
-        'new-comment': []
+        'new-comment': [],
+        'isLiked': false
     },
     {
         'user-pic': 'img/user04_active.png',
@@ -68,7 +70,8 @@ let posts = [
         'amount-comments': '1',
         'followers': ['<b>Lunia</b>'],
         'comments': ['Vielleicht in die Schweiz?'],
-        'new-comment': []
+        'new-comment': [],
+        'isLiked': false
     },
     {
         'user-pic': 'img/user05_active.png',
@@ -81,7 +84,8 @@ let posts = [
         'amount-comments': '2',
         'followers': ['<b>Marek</b>', '<b>Daniel</b>'],
         'comments': ['Ach ihr seid in Indonesien? Viel Spaß!', 'Würde gerne tauschen mit euch.'],
-        'new-comment': []
+        'new-comment': [],
+        'isLiked': false
     },
     {
         'user-pic': 'img/user06_active.png',
@@ -94,7 +98,8 @@ let posts = [
         'amount-comments': '2',
         'followers': ['<b>Tamara</b>', '<b>Lukas</b>'],
         'comments': ['Was machst du denn am Chiemsee?', 'Wow!'],
-        'new-comment': []
+        'new-comment': [],
+        'isLiked': false
     },
     {
         'user-pic': 'img/user07_active.png',
@@ -107,7 +112,8 @@ let posts = [
         'amount-comments': '1',
         'followers': ['<b>Bibi1015</b> '],
         'comments': ['Hey @Marie: Da fahren wir nächstes Mal hin.'],
-        'new-comment': []
+        'new-comment': [],
+        'isLiked': false
     },
     {
         'user-pic': 'img/user08_active.png',
@@ -120,7 +126,8 @@ let posts = [
         'amount-comments': '2',
         'followers': ['<b>Gloria</b>', '<b>Marcel</b>'],
         'comments': ['Bietet ihr nur Frontend-Kurse oder auch Backend?.', 'Du kannst dort beides machen. Also Fullstack...'],
-        'new-comment': []
+        'new-comment': [],
+        'isLiked': false
     },
 ]
 
@@ -167,7 +174,7 @@ function showPosts() {
             <div class="post-bottom">
                 <div class="post-bottom-symbols">
                         <div class="post-bottom-symbols-left">
-                            <i class="fa-regular fa-heart fa-xl heart-black" id="heart${j}" onclick="toggleHeart(${j})"></i>
+                            <i class="fa-heart fa-xl ${getLikeState(j)}" id="heart${j}" onclick="toggleHeart(${j})"></i>
                             <i class="fa-regular fa-comment fa-xl"></i>
                             <i class="fa-regular fa-envelope fa-xl"></i>
                         </div>
@@ -245,18 +252,17 @@ function toggleBookmark(j) {
     element.classList.toggle("fa-solid");
 }
 
-function toggleHeart(j) {
-    let element = document.getElementById(`heart${j}`);
-    element.classList.toggle("heart-red");
-    element.classList.toggle("fa-solid");
-
-    toggleAmount(j);
+function getLikeState(j) {
+    if (posts[j]['isLiked'] === true) {
+    return `fa-solid heart-red`;
+    } else { 
+    return `fa-regular heart-black`;
+    }
 }
 
-function toggleAmount(j) {
-    let element = document.getElementById(`heart${j}`);
+function toggleHeart(j) {
 
-    if (element.classList.contains("heart-red")) {
+    if (posts[j]['isLiked'] === false) {
         posts[j]['amount-likes']++;
         document.getElementById(`likes${j}`).innerHTML = '';
         document.getElementById(`likes${j}`).innerHTML = `<span>Gef&auml;llt ${posts[j]['amount-likes']} Mal</span>`; 
@@ -265,7 +271,6 @@ function toggleAmount(j) {
         document.getElementById(`likes${j}`).innerHTML = '';
         document.getElementById(`likes${j}`).innerHTML = `<span>Gef&auml;llt ${posts[j]['amount-likes']} Mal</span>`;
     }
-    showPosts();
 }
 
 // function heart(j){
