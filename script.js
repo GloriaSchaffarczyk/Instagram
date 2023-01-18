@@ -289,8 +289,7 @@ function loadAsText(j) {
 }
 
 function deleteComment(j, k) {
-    posts[j]['new-comment'].splice(k, 2);
+    posts[j]['new-comment'].splice(k, 1);
 
-    saveAsText(j);
-    showPosts();
+    showPosts(); // mit neuem Aufruf werden alle Kommentare gelöscht (Fehler in local Storage?)
 }
