@@ -210,7 +210,19 @@ function showPosts() {
 // Variablen werden mit ${} übergeben, da sie als Elemente in einer For-Schleife mehrfach erstellt werden.
 // Variablen werden in den Funktionen als simple Buchstaben übergeben, weil ???
 
-function addComment(j) {
+function showComments(j) {
+    document.getElementById(`posted-comments${j}`).innerHTML = '';
+    let content = document.getElementById(`posted-comments${j}`);
+    content.innerHTML = '';
+
+    for (let k = 0; k < posts[j]['followers'].length; k++) {
+        let follower = posts[j]['followers'][k];
+        let comment = posts[j]['comments'][k];
+        content.innerHTML += `<p><b>${follower}:</b> ${comment}</p>`;
+    }
+}
+
+function addComment(j, k) {
     let content = document.getElementById(`new-comment-section${j}`);
 
     let input = document.getElementById(`commentsection${j}`);
@@ -224,7 +236,7 @@ function addComment(j) {
 
         content.innerHTML += `<div class="new-comment">
         <div><b>${userName}:</b> ${newComment}</div>
-        <div class="trash" onclick="deleteComment(${j})"><i class="fa-regular fa-trash-can"></i></div>
+        <div class="trash" onclick="deleteComment(${j},${k})"><i class="fa-regular fa-trash-can"></i></div>
         </div>`;
     } else {
         alert('Bitte gib etwas mehr Text ein.')
@@ -234,17 +246,11 @@ function addComment(j) {
     loadAsText(j);
 }
 
-function showComments(j) {
-    document.getElementById(`posted-comments${j}`).innerHTML = '';
-    let content = document.getElementById(`posted-comments${j}`);
-    content.innerHTML = '';
-
-    for (let k = 0; k < posts[j]['followers'].length; k++) {
-        let follower = posts[j]['followers'][k];
-        let comment = posts[j]['comments'][k];
-        content.innerHTML += `<p><b>${follower}:</b> ${comment}</p>`;
-    }
+function deleteComment(j, k) {
+    posts[j]['new-comment'].splice(k, 1);
+    showPosts(); // mit neuem Aufruf werden alle Kommentare gelöscht (Fehler in local Storage?)
 }
+
 
 function toggleBookmark(j) {
     let element = document.getElementById(`bookmark${j}`);
@@ -288,8 +294,3 @@ function loadAsText(j) {
     }
 }
 
-function deleteComment(j, k) {
-    posts[j]['new-comment'].splice(k, 1);
-
-    showPosts(); // mit neuem Aufruf werden alle Kommentare gelöscht (Fehler in local Storage?)
-}
