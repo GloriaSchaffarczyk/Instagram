@@ -194,6 +194,7 @@ function showPosts() {
                         </div>
                         <div class="posted-comments" id="posted-comments${j}"></div>
                         <div class="new-comments" id="new-comment-section${j}"></div>
+                        ${generateComments(j)}
                 </div>
                 <div class="comment">
                     <textarea class="commentsection" id="commentsection${j}" cols="30" rows="1" placeholder="Kommentieren..."></textarea>
@@ -206,9 +207,57 @@ function showPosts() {
     }
 }
 
+function generateComments(j) {
+    let htmlText = "";
+    for (let k = 0; k < posts[j]['comments'].length; k++) {
+
+
+
+        htmlText += `<div class="new-comment">
+        <div><b>${userName}:</b> ${newComment}</div>
+        <div class="trash" onclick="deleteComment(${j},${k})"><i class="fa-regular fa-trash-can"></i> </div>
+        </div>`;        
+    }
+    return htmlText;
+}
+
 // Variablen werden ab hier in den Funktionen in (``) übergeben, da sie in HTML-Text eingefügt werden.
 // Variablen werden mit ${} übergeben, da sie als Elemente in einer For-Schleife mehrfach erstellt werden.
 // Variablen werden in den Funktionen als simple Buchstaben übergeben, weil ???
+
+/* function showAndAddComments(j, k) {
+    document.getElementById(posted-comments${j}).innerHTML = '';
+    let content = document.getElementById(posted-comments${j});
+    content.innerHTML = '';
+
+    for (let k = 0; k < posts[j]['followers'].length; k++) {
+        let follower = posts[j]['followers'][k];
+        let comment = posts[j]['comments'][k];
+        content.innerHTML += `<p><b>${follower}:</b> ${comment}</p>`;
+    }
+    
+    let input_content = document.getElementById(`new-comment-section${j}`);
+    let input = document.getElementById(`commentsection${j}`);
+    let newComment = input.value;
+    let userName = 'Gast'
+    
+    if (document.getElementById(`commentsection${j}`).value.length > 0) {
+    
+        posts[j]['new-comment'].push(userName);
+        posts[j]['new-comment'].push(newComment);
+    
+        input_content.innerHTML += `<div class="new-comment">
+        <div><b>${userName}:</b> ${newComment}</div>
+        <div class="trash" onclick="deleteComment(${j},${k})"><i class="fa-regular fa-trash-can"></i> </div>
+        </div>`;
+    } else {
+        alert('Bitte gib etwas mehr Text ein.')
+    }
+    input.value = ''; // leert die Textarea nach der Texteingabe
+    saveAsText(j);
+    loadAsText(j);
+} */
+    
 
 function showComments(j) {
     document.getElementById(`posted-comments${j}`).innerHTML = '';
@@ -231,6 +280,7 @@ function addComment(j, k) {
 
     // checkt ob die Textarea leer ist
     if (document.getElementById(`commentsection${j}`).value.length > 0) {
+
         posts[j]['new-comment'].push(userName);
         posts[j]['new-comment'].push(newComment);
 
@@ -248,7 +298,7 @@ function addComment(j, k) {
 
 function deleteComment(j, k) {
     posts[j]['new-comment'].splice(k, 1);
-    showPosts(); // mit neuem Aufruf werden alle Kommentare gelöscht (Fehler in local Storage?)
+    showPosts(); 
 }
 
 
