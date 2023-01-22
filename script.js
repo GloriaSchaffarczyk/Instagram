@@ -140,13 +140,7 @@ function showStories() {
 
     for (let i = 0; i < stories.length; i++) {
         const story = stories[i];
-
-        document.getElementById('new-stories').innerHTML += `
-        <div class="story-user">
-        <img src="${story['story-pic']}" alt="">
-        <span>${story['story-name']}</span>
-        </div>
-    `
+        document.getElementById('new-stories').innerHTML += generateStoriesHTML(story);
     }
     showPosts();
 }
@@ -156,56 +150,7 @@ function showPosts() {
 
     for (let j = 0; j < posts.length; j++) {
         const post = posts[j];
-
-        document.getElementById('post').innerHTML += `
-        <div class="post-div" id="post-div">
-            <div class="post-top">
-                <div class="post-top-left">
-                        <img src="${post['user-pic']}" alt="">
-                        <div class="post-location">
-                            <h5>${post['user-name']}</h5>
-                            <p>${post['user-location']}</p>
-                        </div>
-                </div>
-                        <div class="post-top-right">
-                            <i class="fa-solid fa-ellipsis fa-xl"></i>
-                        </div>
-            </div>
-            <div class="post-pic">
-                    <img src="${post['posted-pic']}" alt="">
-            </div>
-            <div class="post-bottom">
-                <div class="post-bottom-symbols">
-                        <div class="post-bottom-symbols-left">
-                            <i class="fa-heart fa-xl ${getLikeState(j)}" id="heart${j}" onclick="toggleHeart(${j})"></i>
-                            <i class="fa-regular fa-comment fa-xl"></i>
-                            <i class="fa-regular fa-envelope fa-xl"></i>
-                        </div>
-                        <div class="post-bottom-symbol-right">
-                            <i class="fa-regular fa-bookmark fa-xl bookmark-black" id="bookmark${j}" onclick="toggleBookmark(${j})"></i>
-                        </div>
-                </div>
-                <div class="likes-and-description">
-                            <div class="likes" id="likes${j}">
-                                <span>Gef&auml;llt ${post['amount-likes']} Mal</span>
-                            </div>
-                            <div>    
-                                <p><b>${post['user-name']}</b> ${post['description']}</p>
-                                <p class="hashtags">${post['hashtags']}</p>
-                                <p>${post['amount-comments']} Kommentar(e) anzeigen</p>
-                            </div>
-                        </div>
-                        <div class="posted-comments" id="posted-comments${j}"></div>
-                        ${generateComments(j)}
-                        <div class="new-comments" id="new-comment-section${j}"></div>
-                </div>
-                <div class="comment">
-                    <textarea class="commentsection" id="commentsection${j}" cols="30" rows="1" placeholder="Kommentieren..."></textarea>
-                    <button class="comment-button" onclick="addComment(${j})">Posten</button>
-                </div>
-            </div>
-        </div>
-        `
+        document.getElementById('post').innerHTML += generatePostHTML(post, j);
     }
 }
 
@@ -257,7 +202,6 @@ function deleteComment(j, l) {
     renderNewComments(j);
 }
 
-
 function toggleBookmark(j) {
     let element = document.getElementById(`bookmark${j}`);
     element.classList.toggle("bookmark-green");
@@ -284,7 +228,7 @@ function toggleHeart(j) {
         document.getElementById(`likes${j}`).innerHTML = `<span>Gef&auml;llt ${posts[j]['amount-likes']} Mal</span>`;
         posts[j]['isLiked'] = false;
     }
-    showPosts(); // musste noch hinzugefügt werden, damit das Herz sich fräbt (neu gerenderd)
+    showPosts(); // musste noch hinzugefügt werden, damit das Herz sich färbt (neu gerenderd)
 }
 
 function saveAsText(j) {
@@ -298,5 +242,68 @@ function loadAsText(j) {
     if (commentsAsText) {
         posts[j]['new-comment'] = JSON.parse(commentsAsText);
     }
+}
+
+//templates
+
+function generateStoriesHTML(story) {
+    return `
+    <div class="story-user">
+    <img src="${story['story-pic']}" alt="">
+    <span>${story['story-name']}</span>
+    </div>
+`
+}
+
+function generatePostHTML (post, j) {
+    return  `
+    <div class="post-div" id="post-div">
+        <div class="post-top">
+            <div class="post-top-left">
+                    <img src="${post['user-pic']}" alt="">
+                    <div class="post-location">
+                        <h5>${post['user-name']}</h5>
+                        <p>${post['user-location']}</p>
+                    </div>
+            </div>
+                    <div class="post-top-right">
+                        <i class="fa-solid fa-ellipsis fa-xl"></i>
+                    </div>
+        </div>
+        <div class="post-pic">
+                <img src="${post['posted-pic']}" alt="">
+        </div>
+        <div class="post-bottom">
+            <div class="post-bottom-symbols">
+                    <div class="post-bottom-symbols-left">
+                        <i class="fa-heart fa-xl ${getLikeState(j)}" id="heart${j}" onclick="toggleHeart(${j})"></i>
+                        <i class="fa-regular fa-comment fa-xl"></i>
+                        <i class="fa-regular fa-envelope fa-xl"></i>
+                    </div>
+                    <div class="post-bottom-symbol-right">
+                        <i class="fa-regular fa-bookmark fa-xl bookmark-black" id="bookmark${j}" onclick="toggleBookmark(${j})"></i>
+                    </div>
+            </div>
+            <div class="likes-and-description">
+                        <div class="likes" id="likes${j}">
+                            <span>Gef&auml;llt ${post['amount-likes']} Mal</span>
+                        </div>
+                        <div>    
+                            <p><b>${post['user-name']}</b> ${post['description']}</p>
+                            <p class="hashtags">${post['hashtags']}</p>
+                            <p>${post['amount-comments']} Kommentar(e) anzeigen</p>
+                        </div>
+                    </div>
+                    <div class="posted-comments" id="posted-comments${j}"></div>
+                    ${generateComments(j)}
+                    <div class="new-comments" id="new-comment-section${j}"></div>
+            </div>
+            <div class="comment">
+                <textarea class="commentsection" id="commentsection${j}" cols="30" rows="1" placeholder="Kommentieren..."></textarea>
+                <button class="comment-button" onclick="addComment(${j})">Posten</button>
+            </div>
+        </div>
+    </div>
+    `
 }
 
