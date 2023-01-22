@@ -1,3 +1,5 @@
+let currentUser = 'Max_Mustermann';
+
 let stories = [
     {
         'story-pic': 'img/user02_active.png',
@@ -131,6 +133,8 @@ let posts = [
     },
 ]
 
+loadAsText();
+
 function showStories() {
     document.getElementById('new-stories').innerHTML = '';
 
@@ -153,8 +157,7 @@ function showPosts() {
     for (let j = 0; j < posts.length; j++) {
         const post = posts[j];
 
-        document.getElementById('post').innerHTML +=
-            `
+        document.getElementById('post').innerHTML += `
         <div class="post-div" id="post-div">
             <div class="post-top">
                 <div class="post-top-left">
@@ -193,12 +196,12 @@ function showPosts() {
                             </div>
                         </div>
                         <div class="posted-comments" id="posted-comments${j}"></div>
-                        <div class="new-comments" id="new-comment-section${j}"></div>
                         ${generateComments(j)}
+                        <div class="new-comments" id="new-comment-section${j}"></div>
                 </div>
                 <div class="comment">
                     <textarea class="commentsection" id="commentsection${j}" cols="30" rows="1" placeholder="Kommentieren..."></textarea>
-                    <button class="comment-button" onclick="addComment(${j}, ${k})">Posten</button>
+                    <button class="comment-button" onclick="addComment(${j})">Posten</button>
                 </div>
             </div>
         </div>
@@ -213,7 +216,7 @@ function generateComments(j) {
         let follower = posts[j]['followers'][k];
         let comment = posts[j]['comments'][k];
         htmlText += `<p><b>${follower}:</b> ${comment}</p>`;
-    }       
+    }
     return htmlText;
 }
 
@@ -221,34 +224,37 @@ function generateComments(j) {
 // Variablen werden mit ${} übergeben, da sie als Elemente in einer For-Schleife mehrfach erstellt werden.
 // Variablen werden in den Funktionen als simple Buchstaben übergeben, weil ???    
 
-function addComment(j, k) {
-    let content = document.getElementById(`new-comment-section${j}`);
-
+function addComment(j) {
     let input = document.getElementById(`commentsection${j}`);
     let newComment = input.value;
-    let userName = 'Gast'
 
     // checkt ob die Textarea leer ist
-    if (document.getElementById(`commentsection${j}`).value.length > 0) {
-
-        posts[j]['new-comment'].push(userName);
-        posts[j]['new-comment'].push(newComment);
-
-        content.innerHTML += `<div class="new-comment">
-        <div><b>${userName}:</b> ${newComment}</div>
-        <div class="trash" onclick="deleteComment(${j},${k})"><i class="fa-regular fa-trash-can"></i></div>
-        </div>`;
-    } else {
-        alert('Bitte gib etwas mehr Text ein.')
-    }
+        if (input.value.length > 0) {
+            posts[j]['new-comment'].push(newComment);
+        } else {
+            alert('Bitte gib etwas mehr Text ein.')
+        }
     input.value = ''; // leert die Textarea nach der Texteingabe
     saveAsText(j);
-    loadAsText(j);
+    renderNewComments(j);   
 }
 
-function deleteComment(j, k) {
-    posts[j]['new-comment'].splice(k, 1);
-    showPosts(); 
+function renderNewComments(j) {
+    let content = document.getElementById(`new-comment-section${j}`);
+    content.innerHTML = '';
+    for (let l = 0; l < posts[j]['new-comment'].length; l++) {
+       content.innerHTML += `
+       <div class="new-comment">
+            <p><b>${currentUser}:</b> ${posts[j]['new-comment'][l]}</p>
+            <div class="trash" onclick="deleteComment(${j},${l})"><i class="fa-regular fa-trash-can"></i></div>
+        </div>`; 
+    }
+}
+
+function deleteComment(j, l) {
+    posts[j]['new-comment'].splice(l, 1);
+    showPosts();
+    renderNewComments(j);
 }
 
 
@@ -283,11 +289,11 @@ function toggleHeart(j) {
 
 function saveAsText(j) {
     let commentsAsText = JSON.stringify(posts[j]['new-comment']);
-    localStorage.setItem(`Kommentar[${j}]`, commentsAsText);
+    localStorage.setItem(`Post[${j}]`, commentsAsText);
 }
 
 function loadAsText(j) {
-    let commentsAsText = localStorage.getItem(`Kommentar[${j}]`);
+    let commentsAsText = localStorage.getItem(`Post[${j}]`);
 
     if (commentsAsText) {
         posts[j]['new-comment'] = JSON.parse(commentsAsText);

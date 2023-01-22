@@ -313,6 +313,10 @@ textarea:focus {
     color: rgb(74, 186, 74);
 }
 
+.trash {
+    cursor: pointer;
+}
+
 @media (max-width: 800px) {
     .main {
         display: flex;
