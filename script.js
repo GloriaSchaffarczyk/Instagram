@@ -189,16 +189,16 @@ function renderNewComments(j) {
     content.innerHTML = '';
     for (let l = 0; l < posts[j]['new-comment'].length; l++) {
        content.innerHTML += `
-       <div class="new-comment">
-            <p><b>${currentUser}:</b> ${posts[j]['new-comment'][l]}</p>
-            <div class="trash" onclick="deleteComment(${j},${l})"><i class="fa-regular fa-trash-can"></i></div>
+        <div class="new-comment">
+                <p><b>${currentUser}:</b> ${posts[j]['new-comment'][l]}</p>
+                <div class="trash" onclick="deleteComment(${j},${l})"><i class="fa-regular fa-trash-can"></i></div>
         </div>`; 
     }
 }
 
 function deleteComment(j, l) {
     posts[j]['new-comment'].splice(l, 1);
-    showPosts();
+    saveAsText(j);
     renderNewComments(j);
 }
 
