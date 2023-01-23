@@ -56,7 +56,7 @@ let posts = [
         'description': 'Seid ihr schonmal in einer Gondola durch Venedig geschippert?',
         'hashtags': '#venice #travellife #europe',
         'amount-comments': '3',
-        'followers': ['<b>Hasan</b> ', '<b>Olaf</b>', '<b>Annika</b>'],
+        'followers': ['<b>Hasan</b>', '<b>Olaf</b>', '<b>Annika</b>'],
         'comments': ['Was kostet denn so eine Fahrt?', 'Komm mal lieber wieder nach Hause.', 'Wow! Super schön!'],
         'new-comment': [],
         'isLiked': false
@@ -174,14 +174,14 @@ function addComment(j) {
     let newComment = input.value;
 
     // checkt ob die Textarea leer ist
-        if (input.value.length > 0) {
+        if (newComment.length > 0) {
             posts[j]['new-comment'].push(newComment);
+            saveAsText(j);
+            renderNewComments(j);
         } else {
             alert('Bitte gib etwas mehr Text ein.')
         }
     input.value = ''; // leert die Textarea nach der Texteingabe
-    saveAsText(j);
-    renderNewComments(j);   
 }
 
 function renderNewComments(j) {
