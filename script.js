@@ -133,8 +133,6 @@ let posts = [
     },
 ]
 
-loadAsText();
-
 function showStories() {
     document.getElementById('new-stories').innerHTML = '';
 
@@ -149,8 +147,10 @@ function showPosts() {
     document.getElementById('post').innerHTML = '';
 
     for (let j = 0; j < posts.length; j++) {
+        loadAsText(j);
         const post = posts[j];
         document.getElementById('post').innerHTML += generatePostHTML(post, j);
+        renderNewComments(j);
     }
 }
 
@@ -164,16 +164,12 @@ function generateComments(j) {
     }
     return htmlText;
 }
-
-// Variablen werden ab hier in den Funktionen in (``) übergeben, da sie in HTML-Text eingefügt werden.
-// Variablen werden mit ${} übergeben, da sie als Elemente in einer For-Schleife mehrfach erstellt werden.
-// Variablen werden in den Funktionen als simple Buchstaben übergeben, weil ???    
+   
 
 function addComment(j) {
     let input = document.getElementById(`commentsection${j}`);
     let newComment = input.value;
 
-    // checkt ob die Textarea leer ist
         if (newComment.length > 0) {
             posts[j]['new-comment'].push(newComment);
             saveAsText(j);
@@ -181,13 +177,14 @@ function addComment(j) {
         } else {
             alert('Bitte gib etwas mehr Text ein.')
         }
-    input.value = ''; // leert die Textarea nach der Texteingabe
+    input.value = ''; 
 }
 
 function renderNewComments(j) {
     let content = document.getElementById(`new-comment-section${j}`);
     content.innerHTML = '';
     for (let l = 0; l < posts[j]['new-comment'].length; l++) {
+        loadAsText(j);
        content.innerHTML += `
         <div class="new-comment">
                 <p><b>${currentUser}:</b> ${posts[j]['new-comment'][l]}</p>
@@ -228,7 +225,7 @@ function toggleHeart(j) {
         document.getElementById(`likes${j}`).innerHTML = `<span>Gef&auml;llt ${posts[j]['amount-likes']} Mal</span>`;
         posts[j]['isLiked'] = false;
     }
-    showPosts(); // musste noch hinzugefügt werden, damit das Herz sich färbt (neu gerenderd)
+    showPosts();
 }
 
 function saveAsText(j) {
