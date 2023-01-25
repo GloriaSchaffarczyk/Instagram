@@ -164,20 +164,20 @@ function generateComments(j) {
     }
     return htmlText;
 }
-   
+
 
 function addComment(j) {
     let input = document.getElementById(`commentsection${j}`);
     let newComment = input.value;
 
-        if (newComment.length > 0) {
-            posts[j]['new-comment'].push(newComment);
-            saveAsText(j);
-            renderNewComments(j);
-        } else {
-            alert('Bitte gib etwas mehr Text ein.')
-        }
-    input.value = ''; 
+    if (newComment.length > 0) {
+        posts[j]['new-comment'].push(newComment);
+        saveAsText(j);
+        renderNewComments(j);
+    } else {
+        alert('Bitte gib etwas mehr Text ein.')
+    }
+    input.value = '';
 }
 
 function renderNewComments(j) {
@@ -185,11 +185,11 @@ function renderNewComments(j) {
     content.innerHTML = '';
     for (let l = 0; l < posts[j]['new-comment'].length; l++) {
         loadAsText(j);
-       content.innerHTML += `
+        content.innerHTML += `
         <div class="new-comment">
                 <p><b>${currentUser}:</b> ${posts[j]['new-comment'][l]}</p>
                 <div class="trash" onclick="deleteComment(${j},${l})"><i class="fa-regular fa-trash-can"></i></div>
-        </div>`; 
+        </div>`;
     }
 }
 
@@ -241,6 +241,22 @@ function loadAsText(j) {
     }
 }
 
+function search() {
+    let search = document.getElementById('search').value;
+    search = search.toLowerCase();
+
+    document.getElementById('post').innerHTML = '';
+
+    for (let j = 0; j < posts.length; j++) {
+        loadAsText(j);
+        const post = posts[j];
+        if (post['user-name'].toLowerCase().includes(search)) {
+            document.getElementById('post').innerHTML += generatePostHTML(post, j);
+            renderNewComments(j);
+        }
+    }
+}
+
 //templates
 
 function generateStoriesHTML(story) {
@@ -252,8 +268,8 @@ function generateStoriesHTML(story) {
 `
 }
 
-function generatePostHTML (post, j) {
-    return  `
+function generatePostHTML(post, j) {
+    return `
     <div class="post-div" id="post-div">
         <div class="post-top">
             <div class="post-top-left">
