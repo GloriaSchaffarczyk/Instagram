@@ -174,9 +174,7 @@ function addComment(j) {
         posts[j]['new-comment'].push(newComment);
         saveAsText(j);
         renderNewComments(j);
-    } else {
-        alert('Bitte gib etwas mehr Text ein.')
-    }
+    } 
     input.value = '';
 }
 
@@ -311,10 +309,12 @@ function generatePostHTML(post, j) {
                     ${generateComments(j)}
                     <div class="new-comments" id="new-comment-section${j}"></div>
             </div>
+            <form onsubmit="addComment(${j})">
             <div class="comment">
-                <textarea class="commentsection" id="commentsection${j}" cols="30" rows="1" placeholder="Kommentieren..."></textarea>
+                <textarea required class="commentsection" id="commentsection${j}" cols="30" rows="1" placeholder="Kommentieren..."></textarea>
                 <button class="comment-button" onclick="addComment(${j})">Posten</button>
             </div>
+            </form>
         </div>
     </div>
     `
