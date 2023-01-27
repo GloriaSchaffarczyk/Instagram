@@ -170,11 +170,9 @@ function addComment(j) {
     let input = document.getElementById(`commentsection${j}`);
     let newComment = input.value;
 
-    if (newComment.length > 0) {
-        posts[j]['new-comment'].push(newComment);
-        saveAsText(j);
-        renderNewComments(j);
-    } 
+    posts[j]['new-comment'].push(newComment);
+    saveAsText(j);
+    renderNewComments(j);
     input.value = '';
 }
 
@@ -309,10 +307,10 @@ function generatePostHTML(post, j) {
                     ${generateComments(j)}
                     <div class="new-comments" id="new-comment-section${j}"></div>
             </div>
-            <form onsubmit="addComment(${j})">
+            <form onsubmit="addComment(${j}); return false;">
             <div class="comment">
                 <textarea required class="commentsection" id="commentsection${j}" cols="30" rows="1" placeholder="Kommentieren..."></textarea>
-                <button class="comment-button" onclick="addComment(${j})">Posten</button>
+                <button class=" comment-button">Posten</button>
             </div>
             </form>
         </div>
