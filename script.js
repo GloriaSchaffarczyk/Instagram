@@ -165,7 +165,6 @@ function generateComments(j) {
     return htmlText;
 }
 
-
 function addComment(j) {
     let input = document.getElementById(`commentsection${j}`);
     let newComment = input.value;
